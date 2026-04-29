@@ -2,7 +2,17 @@ public class CaesarCipher {
 
     // Encodes a single lowercase letter using a Caesar cipher shift.
     // Example: caesarEncodeChar('h', 3) → 'k'
+    int value;
+    int shifted = 0;
     public char caesarEncodeChar(char c, int shift) {
+
+        int place = 0;
+        int shifted = 0;
+        int forward = 0;
+        place = c - 'a';
+        shifted = (place + shift)%26;
+        int value = (char)(shifted + 'a');
+        
 
         // TODO: get the letter's position in the alphabet (0–25)
         //         pos = c - 'a'
@@ -12,8 +22,8 @@ public class CaesarCipher {
 
         // TODO: convert back to a char and return it
         //         return (char)(shifted + 'a')
-
-        return c; // replace this line
+        return (char)(shifted + 'a');
+       
     }
 
 
@@ -23,6 +33,16 @@ public class CaesarCipher {
     public String caesarEncode(String word, int shift) {
 
         // TODO: create an empty String to build your result
+        String cipher = "";
+        for (int i = 0; i < word.length(); i++){
+            char c = word.charAt(i);
+            if (c >= 'a' && c <= 'z'){
+            char encodedLetter = caesarEncodeChar( c,  shift);
+            cipher = cipher + encodedLetter;
+
+
+            } 
+        }
 
         // TODO: loop through every character in word using charAt(i)
 
@@ -32,20 +52,42 @@ public class CaesarCipher {
 
         // TODO: return the encoded string
 
-        return word; // replace this line
+        return cipher; // replace this line
     }
 
 
     // Decodes a lowercase string by shifting backwards.
     // Example: caesarDecode("khoor", 3) → "hello"
     public String caesarDecode(String word, int shift) {
+        String decode = "";
+         for (int i = 0; i < word.length(); i++){
+            
+            char c = word.charAt(i);
+             int pos = (( c - 'a') - shift + 26) %26;
+        shifted = pos;
+            if (c >= 'a' && c <= 'z'){
+            char encodedLetter = caesarEncodeChar( c,  shifted);
+            decode = decode + encodedLetter;
 
+
+            } 
+        }
+        
+       
+        
+        
+       
+      
+      
+      
+
+        
         // TODO: same structure as caesarEncode
         //       the only difference is the shift direction:
         //       shifted = (pos - shift + 26) % 26
         //       the +26 prevents negative numbers
 
-        return word; // replace this line
+        return decode; // replace this line
     }
 
 
